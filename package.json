@@ -1,0 +1,14 @@
+{
+  "name": "movies-explorer-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "lint": "npx eslint .",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "Ilya Novikov",
+  "license": "ISC"
+}
