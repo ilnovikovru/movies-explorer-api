@@ -64,5 +64,5 @@ mongoose.connect(
   })
   .catch((err) => {
     // eslint-disable-next-line no-console
-    console.log(`Ошибка подключения к базе: ${err}`);
+    console.log(`Ошибка подключения к базе следующая: ${err}`);
   });
