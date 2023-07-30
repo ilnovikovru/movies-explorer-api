@@ -24,14 +24,14 @@ mongoose.connect(
   .then(() => {
     const port = process.env.PORT || 3000;
 
-    app.post('/signup', signupValidation, createUser);
-    app.post('/signin', signinValidation, login);
-    app.post('/signout', signout);
+    app.post('/api/signup', signupValidation, createUser);
+    app.post('/api/signin', signinValidation, login);
+    app.post('/api/signout', signout);
 
     app.use(auth);
 
-    app.use('/users', usersRouter);
-    app.use('/movies', moviesRouter);
+    app.use('/api/users', usersRouter);
+    app.use('/api/movies', moviesRouter);
 
     app.use(errorLogger);
 
