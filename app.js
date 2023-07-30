@@ -1,3 +1,5 @@
+require('dotenv').config();
+const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -12,6 +14,8 @@ const moviesRouter = require('./routes/movies');
 const { login, createUser, signout } = require('./controllers/auth');
 
 const app = express();
+
+app.use(cors());
 
 app.use(express.json());
 
