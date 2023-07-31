@@ -16,11 +16,11 @@ const validateMovie = celebrate({
   body: Joi.object().keys({
     country: Joi.string().required(),
     director: Joi.string().required(),
-    duration: Joi.number().required(),
+    duration: Joi.string().required(),
     year: Joi.string().required(),
     description: Joi.string().required(),
     image: Joi.string().required().uri(),
-    trailer: Joi.string().required().uri(),
+    trailerLink: Joi.string().required().uri(),
     thumbnail: Joi.string().required().uri(),
     owner: Joi.string().required().custom((value, helpers) => {
       if (mongoose.Types.ObjectId.isValid(value)) {
@@ -61,7 +61,7 @@ const validateUserUpdate = celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30).required(),
     about: Joi.string().min(2).max(30).required(),
-  }),
+  }).error(new Error('Validation failed')),
 });
 
 module.exports = {

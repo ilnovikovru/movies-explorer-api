@@ -5,28 +5,29 @@ const BadRequestError = require('../errors/BadRequestError');
 
 module.exports.createMovie = (req, res, next) => {
   const {
-    country, director, duration, year, description, image, trailer, nameRU, nameEN, thumbnail,
+    country, director, duration, year, description, image, trailerLink, nameRU, nameEN, thumbnail,
     movieId,
   } = req.body;
 
   Movie.create({
     country,
     director,
-    duration,
+    duration: Number(duration),
     year,
     description,
     image,
-    trailer,
+    trailerLink,
     nameRU,
     nameEN,
     thumbnail,
     movieId,
     owner: req.user._id,
   })
-    .then((movie) => movie.populate('owner').execPopulate())
+    .then((movie) => Movie.findById(movie._id).populate('owner'))
     .then((movie) => res.status(201).send(movie))
     .catch((err) => {
       if (err.name === 'ValidationError') {
+        // console.error(err);
         next(new BadRequestError('Некорректные данные при создании фильма'));
       } else {
         next(err);

@@ -4,7 +4,7 @@ const { validateUserUpdate } = require('../validators');
 
 const router = express.Router();
 
-router.get('/api/me', getUserInfo);
-router.patch('/api/me', validateUserUpdate, updateUserInfo);
+router.get('/me', getUserInfo);
+router.patch('/me', validateUserUpdate, updateUserInfo);
 
 module.exports = router;
