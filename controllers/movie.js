@@ -12,7 +12,7 @@ module.exports.createMovie = (req, res, next) => {
   Movie.create({
     country,
     director,
-    duration: Number(duration),
+    duration,
     year,
     description,
     image,

@@ -3,6 +3,7 @@
 // const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 
+const ConflictError = require('../errors/ConflictError');
 const NotFoundError = require('../errors/NotFoundError');
 const BadRequestError = require('../errors/BadRequestError');
 
@@ -32,7 +33,9 @@ exports.updateUserInfo = (req, res, next) => {
       res.send({ email: user.email, name: user.name });
     })
     .catch((err) => {
-      if (err.name === 'ValidationError') {
+      if (err.code === 11000) {
+        next(new ConflictError('Пользователь с данным email уже существует'));
+      } else if (err.name === 'ValidationError') {
         next(new BadRequestError('Некорректные данные при обновлении профиля'));
       } else {
         next(err);

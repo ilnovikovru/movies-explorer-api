@@ -74,6 +74,11 @@ exports.login = (req, res, next) => {
 };
 
 exports.signout = (req, res) => {
-  res.clearCookie('jwt');
+  res.clearCookie('jwt', {
+    httpOnly: true,
+    sameSite: 'strict',
+    secure: process.env.NODE_ENV === 'production',
+    path: '/',
+  });
   res.status(200).send({ message: 'Успешно вышел' });
 };

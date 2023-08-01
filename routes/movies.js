@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.get('/', getMovies);
 router.post('/', validateMovie, createMovie);
-router.delete('/:_id', validateObjId, deleteMovie);
+router.delete('/:id', validateObjId, deleteMovie);
 
 module.exports = router;

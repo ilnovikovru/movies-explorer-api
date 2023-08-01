@@ -1,4 +1,5 @@
 require('dotenv').config();
+const { errors } = require('celebrate');
 const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
@@ -30,18 +31,21 @@ mongoose.connect(
 
     app.post('/api/signup', signupValidation, createUser);
     app.post('/api/signin', signinValidation, login);
-    app.post('/api/signout', signout);
 
     app.use(auth);
 
-    app.use('/api/users', usersRouter);
-    app.use('/api/movies', moviesRouter);
+    app.post('/api/signout', signout);
 
-    app.use(errorLogger);
+    app.use('/users', usersRouter);
+    app.use('/movies', moviesRouter);
 
     app.use('*', () => {
       throw new NotFoundError('Запрашиваемая страница не найдена');
     });
+
+    app.use(errorLogger);
+
+    app.use(errors());
 
     app.use((err, req, res, next) => {
       const { statusCode = 500, message } = err;
